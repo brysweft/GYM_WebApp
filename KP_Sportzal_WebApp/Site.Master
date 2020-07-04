@@ -1,0 +1,97 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="KP_Sportzal_WebApp.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> – Спортивный зал</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+       <table style="width: 100%">
+         <tr style="top: 0px; position: fixed; width: 100%; height: 150px; background-color: #F0F0F0;">
+         <td> 
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container" style="color: #FFFFFF; font-size: 30px; font-weight: normal;">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    &nbsp;</div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Домашняя</a></li>
+                        <li><a runat="server" href="~/Treners">Наши тренеры</a></li>
+                        <li><a runat="server" href="~/TimeTable">Расписание занятий</a></li>
+                        <li><a runat="server" href="~/About">О нас</a></li>
+                        <li><a runat="server" href="~/Contact">Связаться</a></li>   
+                        <li><a runat="server" href="~/login"  >
+                         <% if (Session["User"] != null)
+                             {
+                                 Response.Write("<p style=\"color: #800000; text-decoration: blink; text-transform: inherit;\">");
+                                 Response.Write("Меню - " + Session["User"].ToString());
+                                 Response.Write("</p>");
+                             }
+                             else
+                             {
+                                 Response.Write("<p>");
+                                 Response.Write("Войти");
+                                 Response.Write("</p>");
+                             }%>    
+                         </a></li>
+                        <li><asp:LinkButton ID="LinkButton2" runat="server" OnClick="LinkButton2_Click">Выйти</asp:LinkButton></li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+                             
+         </td></tr>
+        <tr style="top: 150px; position: fixed; width: 100%;">
+        <td style="width: 200px; background-color: #F0F0F0; left: 0px;"></td>  
+        <td style="width: 1600px"> 
+        <div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+        </div>
+        </td> 
+        <td style="width: 200px; background-color: #F0F0F0; right: 0px;" > </td>
+        </tr>      
+        </table>
+    </form>
+
+</body>
+</html>
